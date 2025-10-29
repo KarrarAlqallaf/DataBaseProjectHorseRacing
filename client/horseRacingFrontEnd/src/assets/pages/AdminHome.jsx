@@ -16,7 +16,7 @@ const AdminHome = () => {
         <h1>Admin Home</h1>
         {/* this should be the first row */}
         <div> 
-            <button>Add Race</button>
+        <button onClick={() => navigate('/addrace')}>Add Race</button>
             <button>Delete Owner</button>
             <button>Move Horse</button>
             <button>New Trainer</button>

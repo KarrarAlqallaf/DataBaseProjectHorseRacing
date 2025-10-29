@@ -99,6 +99,87 @@ app.post("/horse", (req,res)=>{
     } )
 })
 
+// Stable: create a stable
+app.post("/stable", (req, res) => {
+    const { stableId, stableName, location, colors } = req.body
+    const q = "INSERT INTO Stable (stableId, stableName, location, colors) VALUES (?, ?, ?, ?)"
+    db.query(q, [stableId, stableName, location, colors], (err) => {
+      if (err) return res.status(500).json(err)
+      res.json({ message: "stable created", stableId })
+    })
+  })
+  
+  // Owner: create an owner
+  app.post("/owner", (req, res) => {
+    const { ownerId, lname, fname } = req.body
+    const q = "INSERT INTO Owner (ownerId, lname, fname) VALUES (?, ?, ?)"
+    db.query(q, [ownerId, lname, fname], (err) => {
+      if (err) return res.status(500).json(err)
+      res.json({ message: "owner created", ownerId })
+    })
+  })
+  
+  // Horse: create a horse
+  app.post("/horse", (req, res) => {
+    const { horseId, horseName, age, gender, registration, stableId } = req.body
+    const q = "INSERT INTO Horse (horseId, horseName, age, gender, registration, stableId) VALUES (?, ?, ?, ?, ?, ?)"
+    db.query(q, [horseId, horseName, age, gender, registration, stableId], (err) => {
+      if (err) return res.status(500).json(err)
+      res.json({ message: "horse created", horseId })
+    })
+  })
+  
+  // Owns: link owner to horse
+  app.post("/owns", (req, res) => {
+    const { ownerId, horseId } = req.body
+    const q = "INSERT INTO Owns (ownerId, horseId) VALUES (?, ?)"
+    db.query(q, [ownerId, horseId], (err) => {
+      if (err) return res.status(500).json(err)
+      res.json({ message: "relation created", ownerId, horseId })
+    })
+  })
+  
+  // Trainer
+  app.post("/trainer", (req, res) => {
+    const { trainerId, lname, fname, stableId } = req.body
+    const q = "INSERT INTO Trainer (trainerId, lname, fname, stableId) VALUES (?, ?, ?, ?)"
+    db.query(q, [trainerId, lname, fname, stableId], (err) => {
+      if (err) return res.status(500).json(err)
+      res.json({ message: "trainer created", trainerId })
+    })
+  })
+  
+  // Track
+  app.post("/track", (req, res) => {
+    const { trackName, location, length } = req.body
+    const q = "INSERT INTO Track (trackName, location, length) VALUES (?, ?, ?)"
+    db.query(q, [trackName, location, length], (err) => {
+      if (err) return res.status(500).json(err)
+      res.json({ message: "track created", trackName })
+    })
+  })
+  
+  // Race
+  app.post("/race", (req, res) => {
+    const { raceId, raceName, trackName, raceDate, raceTime } = req.body
+    const q = "INSERT INTO Race (raceId, raceName, trackName, raceDate, raceTime) VALUES (?, ?, ?, ?, ?)"
+    db.query(q, [raceId, raceName, trackName, raceDate, raceTime], (err) => {
+      if (err) return res.status(500).json(err)
+      res.json({ message: "race created", raceId })
+    })
+  })
+  
+  // RaceResults
+  app.post("/raceresults", (req, res) => {
+    const { raceId, horseId, results, prize } = req.body
+    const q = "INSERT INTO RaceResults (raceId, horseId, results, prize) VALUES (?, ?, ?, ?)"
+    db.query(q, [raceId, horseId, results, prize], (err) => {
+      if (err) return res.status(500).json(err)
+      res.json({ message: "result created", raceId, horseId })
+    })
+  })
+
+
 
 
 app.listen(8800, ()=>{
