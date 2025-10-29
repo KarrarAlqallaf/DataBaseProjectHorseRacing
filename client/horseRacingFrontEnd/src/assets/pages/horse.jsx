@@ -13,16 +13,16 @@ const Horse = () => {
         console.log(err)
       }
     }
-    fetchALLHorses()
+    fetchALLHorses() 
   }, [])
 
   return (
     <div>
       <h1>this page shows all horses in the data base</h1>
       {horses.map((h) => (
-        <div className='horse' key={h.horseId}>
+        <div className='table' key={h.raceId}>
           <h2>{h.horseId}</h2>
-          <h3>{h.horseName}</h3>
+          <h2>{h.horseName}</h2>
         </div>
       ))}
     </div>
