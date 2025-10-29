@@ -20,23 +20,7 @@ function DeleteOwner() {
 
   return (
     <div className='form'>
-        <button>Guest</button> 
-        <h1>Admin Home</h1>
-        {/* this should be the first row */}
-        <div> 
-        <button onClick={() => navigate('/addrace')}>Add Race</button>
-            <button>Delete Owner</button>
-            <button>Move Horse</button>
-            <button>New Trainer</button>
-        </div>
-        {/* this is the second row of buttons  */}
-        <div>
-        <button onClick={() => navigate('/races')}>Races</button>
-        <button onClick={()=> navigate('/owners')}>Owners</button>
-        <button onClick={()=> navigate('/stables')}>Stables</button>
-        <button onClick={()=> navigate('/trainers')}>Trainers</button>
-
-        </div>
+        <button onClick={() => navigate('/adminHome')}>Admin Home</button>
       <h1>Delete Owner</h1>
       <input
         type="text"

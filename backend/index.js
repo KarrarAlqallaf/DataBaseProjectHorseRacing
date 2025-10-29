@@ -195,6 +195,27 @@ app.post("/stable", (req, res) => {
     })
   })
 
+  // Move Horse to a different stable (checks FK constraint)
+  app.put("/horse/:horseId/move", (req, res) => {
+    const { horseId } = req.params
+    const { stableId } = req.body
+    if (!stableId) return res.status(400).json({ message: "stableId is required" })
+
+    // Verify target stable exists to avoid FK error
+    const checkStable = "SELECT 1 FROM Stable WHERE stableId = ? LIMIT 1"
+    db.query(checkStable, [stableId], (err, rows) => {
+      if (err) return res.status(500).json(err)
+      if (rows.length === 0) return res.status(404).json({ message: "target stable not found" })
+
+      const updateHorse = "UPDATE Horse SET stableId = ? WHERE horseId = ?"
+      db.query(updateHorse, [stableId, horseId], (err, result) => {
+        if (err) return res.status(500).json(err)
+        if (result.affectedRows === 0) return res.status(404).json({ message: "horse not found" })
+        res.json({ message: "horse moved", horseId, stableId })
+      })
+    })
+  })
+
 
 
 
