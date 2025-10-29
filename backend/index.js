@@ -216,6 +216,81 @@ app.post("/stable", (req, res) => {
     })
   })
 
+// ========== Guest browse APIs ==========
+// 1) Horses (name, age) and trainer names owned by people given last name
+app.get("/guest/horses-by-owner", (req, res) => {
+  const { lname } = req.query
+  if (!lname) return res.status(400).json({ message: "lname query param is required" })
+  const q = `
+    SELECT h.horseId, h.horseName, h.age, t.trainerId, t.fname AS trainerFname, t.lname AS trainerLname
+    FROM Owner o
+    JOIN Owns ow ON ow.ownerId = o.ownerId
+    JOIN Horse h ON h.horseId = ow.horseId
+    LEFT JOIN Trainer t ON t.stableId = h.stableId
+    WHERE o.lname = ?
+  `
+  db.query(q, [lname], (err, rows) => {
+    if (err) return res.status(500).json(err)
+    res.json(rows)
+  })
+})
+
+// 2) Trainers who have trained winners; include trainer, horse, race details
+app.get("/guest/winner-trainers", (req, res) => {
+  const q = `
+    SELECT DISTINCT 
+      t.trainerId, t.fname AS trainerFname, t.lname AS trainerLname,
+      h.horseId, h.horseName,
+      r.raceId, r.raceName
+    FROM RaceResults rr
+    JOIN Horse h ON h.horseId = rr.horseId
+    LEFT JOIN Trainer t ON t.stableId = h.stableId
+    JOIN Race r ON r.raceId = rr.raceId
+    WHERE LOWER(rr.results) IN ('1', 'first', 'winner')
+  `
+  db.query(q, (err, rows) => {
+    if (err) return res.status(500).json(err)
+    res.json(rows)
+  })
+})
+
+// 3) Trainer total winnings, sorted by winnings desc
+app.get("/guest/trainer-winnings", (req, res) => {
+  const q = `
+    SELECT 
+      t.trainerId, t.fname AS trainerFname, t.lname AS trainerLname,
+      COALESCE(SUM(rr.prize), 0) AS totalWinnings
+    FROM Trainer t
+    LEFT JOIN Horse h ON h.stableId = t.stableId
+    LEFT JOIN RaceResults rr ON rr.horseId = h.horseId
+    GROUP BY t.trainerId, t.fname, t.lname
+    ORDER BY totalWinnings DESC
+  `
+  db.query(q, (err, rows) => {
+    if (err) return res.status(500).json(err)
+    res.json(rows)
+  })
+})
+
+// 4) Track stats: count of races and total horses participating on the track
+app.get("/guest/track-stats", (req, res) => {
+  const q = `
+    SELECT 
+      tr.trackName,
+      COUNT(DISTINCT r.raceId) AS raceCount,
+      COUNT(rr.horseId) AS totalParticipants
+    FROM Track tr
+    LEFT JOIN Race r ON r.trackName = tr.trackName
+    LEFT JOIN RaceResults rr ON rr.raceId = r.raceId
+    GROUP BY tr.trackName
+    ORDER BY tr.trackName
+  `
+  db.query(q, (err, rows) => {
+    if (err) return res.status(500).json(err)
+    res.json(rows)
+  })
+})
+
 
 
 

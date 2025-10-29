@@ -12,7 +12,8 @@ const AdminHome = () => {
   return (
     <div>
         {/* this button should return us to GuestHome  */}
-        <button>Guest</button> 
+        <button onClick={() => navigate('/guestHome')}>Guest</button>
+
         <h1>Admin Home</h1>
         {/* this should be the first row */}
         <div> 
