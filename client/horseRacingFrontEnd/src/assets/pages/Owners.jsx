@@ -3,47 +3,50 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import '../../App.css'
 import { useNavigate } from "react-router-dom"
-const Trainers = () => {
+
+const Owners = () => {
+
     const navigate = useNavigate()
-    const [data,setData] = useState([])
+
+    const [data,setOwners] = useState([])
 
     useEffect(() => {
-        const fetchALLData = async () => {
+        const fetchALLOwners = async () => {
           try {
-            const res = await axios.get('http://localhost:8800/trainer')
-            setData(res.data) 
+            const res = await axios.get('http://localhost:8800/owner')
+            setOwners(res.data) 
           } catch (err) {
             console.log(err)
           }
         }
-        fetchALLData() 
+        fetchALLOwners() 
       }, [])
+
   return (
     <div>
     <button onClick={() => navigate('/adminHome')}>Admin Home</button>
-   <h1>Trainers</h1> 
+   <h1>Owners</h1> 
    <table className='styled-table'>
     <thead>
         <tr>
-        <th>Trainer ID</th>
+        <th>Owner ID</th>
         <th>Last Name</th>
         <th>First Name</th>
-        <th>Stable ID</th>
         </tr>
     </thead>
     <tbody>
         {data.map((d) => (
-        <tr key={d.trainerId}>
-            <td>{d.trainerId}</td>
+        <tr key={d.ownerId}>
+            <td>{d.ownerId}</td>
             <td>{d.lname}</td>
             <td>{d.fname}</td>
-            <td>{d.stableId}</td>
         </tr>
         ))}
     </tbody>
     </table>
 </div>
-  )
+
+)
 }
 
-export default Trainers
+export default Owners

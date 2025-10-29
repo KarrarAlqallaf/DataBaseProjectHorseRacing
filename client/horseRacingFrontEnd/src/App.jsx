@@ -9,6 +9,9 @@ import AdminHome from "./assets/pages/AdminHome"
 import GuestHome from "./assets/pages/GuestHome"
 import Races from "./assets/pages/Races"
 import React from 'react';
+import Owners from "./assets/pages/Owners"
+import { Stables } from "./assets/pages/Stables"
+import Trainers from "./assets/pages/Trainers"
 
 
 function App() {
@@ -20,6 +23,10 @@ function App() {
         <Route path="/adminHome" element={<AdminHome/>} />
         <Route path="/guestHome" element={<GuestHome/>} />
         <Route path="/races" element={<Races/>} />
+        <Route path="/owners" element={<Owners/>} />
+        <Route path="/stables" element={<Stables/>} />
+        <Route path="/trainers" element={<Trainers/>} />
+
       </Routes>
     </BrowserRouter>
   )

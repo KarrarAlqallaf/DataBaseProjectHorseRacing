@@ -24,9 +24,9 @@ const AdminHome = () => {
         {/* this is the second row of buttons  */}
         <div>
         <button onClick={() => navigate('/races')}>Races</button>
-        <button>Owners</button>
-        <button>Stables</button>
-        <button>Trainers</button>
+        <button onClick={()=> navigate('/owners')}>Owners</button>
+        <button onClick={()=> navigate('/stables')}>Stables</button>
+        <button onClick={()=> navigate('/trainers')}>Trainers</button>
 
         </div>
         
