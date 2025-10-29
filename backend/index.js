@@ -119,6 +119,22 @@ app.post("/stable", (req, res) => {
     })
   })
   
+  // Owner: delete by id
+  app.delete("/owner/:ownerId", (req, res) => {
+    const { ownerId } = req.params
+    // Delete dependent rows first to satisfy FK constraints
+    const deleteOwns = "DELETE FROM Owns WHERE ownerId = ?"
+    db.query(deleteOwns, [ownerId], (err) => {
+      if (err) return res.status(500).json(err)
+      const deleteOwner = "DELETE FROM Owner WHERE ownerId = ?"
+      db.query(deleteOwner, [ownerId], (err, result) => {
+        if (err) return res.status(500).json(err)
+        if (result.affectedRows === 0) return res.status(404).json({ message: "owner not found" })
+        res.json({ message: "owner deleted", ownerId })
+      })
+    })
+  })
+  
   // Horse: create a horse
   app.post("/horse", (req, res) => {
     const { horseId, horseName, age, gender, registration, stableId } = req.body
