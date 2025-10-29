@@ -14,6 +14,7 @@ import Owners from "./assets/pages/Owners"
 import { Stables } from "./assets/pages/Stables"
 import Trainers from "./assets/pages/Trainers"
 import MoveHorse from "./assets/pages/MoveHorse"
+import NewTrainer from "./assets/pages/NewTrainer"
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/stables" element={<Stables/>} />
         <Route path="/trainers" element={<Trainers/>} />
         <Route path="/moveHorse" element={<MoveHorse/>} />
+        <Route path="/newTrainer" element={<NewTrainer/>} />
 
       </Routes>
     </BrowserRouter>

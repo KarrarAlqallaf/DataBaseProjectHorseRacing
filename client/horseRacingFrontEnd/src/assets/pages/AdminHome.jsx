@@ -19,7 +19,7 @@ const AdminHome = () => {
         <button onClick={() => navigate('/addrace')}>Add Race</button>
         <button onClick={() => navigate('/deleteOwner')}>Delete Owner</button>
             <button onClick={() => navigate('/moveHorse')}>Move Horse</button>
-            <button>New Trainer</button>
+            <button onClick={() => navigate('/newTrainer')}>New Trainer</button>
         </div>
         {/* this is the second row of buttons  */}
         <div>
