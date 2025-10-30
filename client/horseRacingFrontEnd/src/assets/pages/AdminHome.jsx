@@ -1,38 +1,66 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { useNavigate } from "react-router-dom"
-import Races from './Races'
-
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import Races from './Races';
+import AddRace from './AddRace';
+import DeleteOwner from './DeleteOwner';
+import MoveHorse from './MoveHorse';
+import NewTrainer from './NewTrainer';
+import Owners from './Owners';
+import { Stables } from './Stables';
+import Trainers from './Trainers';
 
 const AdminHome = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [activeComponent, setActiveComponent] = useState(null);
 
+    const renderComponent = () => {
+        switch (activeComponent) {
+            case 'addRace':
+                return <AddRace />;
+            case 'deleteOwner':
+                return <DeleteOwner />;
+            case 'moveHorse':
+                return <MoveHorse />;
+            case 'newTrainer':
+                return <NewTrainer />;
+            case 'races':
+                return <Races />;
+            case 'owners':
+                return <Owners />;
+            case 'stables':
+                return <Stables />;
+            case 'trainers':
+                return <Trainers />;
+            default:
+                return <h2>Select an option to view details.</h2>;
+        }
+    };
 
-  return (
-    <div>
-        {/* this button should return us to GuestHome  */}
-        <button onClick={() => navigate('/guestHome')}>Guest</button>
-
-        <h1>Admin Home</h1>
-        {/* this should be the first row */}
-        <div> 
-        <button onClick={() => navigate('/addrace')}>Add Race</button>
-        <button onClick={() => navigate('/deleteOwner')}>Delete Owner</button>
-            <button onClick={() => navigate('/moveHorse')}>Move Horse</button>
-            <button onClick={() => navigate('/newTrainer')}>New Trainer</button>
+    return (
+      <div className="admin-layout-wrapper def_layout">
+        <div className="admin-header column">
+          <div className='row'>
+            <button onClick={() => navigate('/guestHome')}>Guest</button>
+          </div>
+          <h1>Admin Home</h1>
+          <div className='row'>
+              <button onClick={() => setActiveComponent('addRace')}>Add Race</button>
+              <button onClick={() => setActiveComponent('deleteOwner')}>Delete Owner</button>
+              <button onClick={() => setActiveComponent('moveHorse')}>Move Horse</button>
+              <button onClick={() => setActiveComponent('newTrainer')}>New Trainer</button>
+          </div>
+          <div className='row'>
+              <button onClick={() => setActiveComponent('races')}>Races</button>
+              <button onClick={() => setActiveComponent('owners')}>Owners</button>
+              <button onClick={() => setActiveComponent('stables')}>Stables</button>
+              <button onClick={() => setActiveComponent('trainers')}>Trainers</button>
+          </div>
         </div>
-        {/* this is the second row of buttons  */}
-        <div>
-        <button onClick={() => navigate('/races')}>Races</button>
-        <button onClick={()=> navigate('/owners')}>Owners</button>
-        <button onClick={()=> navigate('/stables')}>Stables</button>
-        <button onClick={()=> navigate('/trainers')}>Trainers</button>
-
+        <div className="admin-content-scrollable">
+          {renderComponent()}
         </div>
-        
-    </div>
-  )
-}
+      </div>
+    );
+};
 
-export default AdminHome
+export default AdminHome;

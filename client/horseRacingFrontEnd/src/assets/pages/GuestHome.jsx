@@ -49,7 +49,7 @@ const GuestHome = () => {
   }, []);
 
   return (
-    <div className='guestHome'>
+    <div className='def_layout'>
       <button onClick={() => navigate('/adminHome')}>Admin Home</button>
       <h1>Guest</h1>
       <div className='row'>

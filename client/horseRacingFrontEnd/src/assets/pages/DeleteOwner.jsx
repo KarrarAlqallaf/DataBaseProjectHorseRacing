@@ -19,9 +19,9 @@ function DeleteOwner() {
   }
 
   return (
-    <div className='form'>
-        <button onClick={() => navigate('/adminHome')}>Admin Home</button>
+    <div className='form column'>
       <h1>Delete Owner</h1>
+      <div className='row'>
       <input
         type="text"
         placeholder='Owner ID'
@@ -29,6 +29,8 @@ function DeleteOwner() {
         onChange={(e)=> setOwnerId(e.target.value)}
       />
       <button onClick={handleDelete}>Delete</button>
+      </div>
+      
     </div>
   )
 }

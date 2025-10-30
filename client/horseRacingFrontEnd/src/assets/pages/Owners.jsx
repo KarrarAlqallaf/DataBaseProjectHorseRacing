@@ -24,7 +24,6 @@ const Owners = () => {
 
   return (
     <div>
-    <button onClick={() => navigate('/adminHome')}>Admin Home</button>
    <h1>Owners</h1> 
    <table className='styled-table'>
     <thead>

@@ -25,7 +25,6 @@ const Races = () => {
   return (
     
     <div>
-        <button onClick={() => navigate('/adminHome')}>Admin Home</button>
        <h1>Races</h1> 
        <table className='styled-table'>
         <thead>

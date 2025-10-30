@@ -23,11 +23,14 @@ function MoveHorse() {
   }
 
   return (
-    <div className='form'>
+    <div className='form column'>
       <h1>Move Horse</h1>
-      <input type="text" placeholder='Horse ID' name='horseId' value={form.horseId} onChange={handleChange} />
-      <input type="text" placeholder='New Stable ID' name='stableId' value={form.stableId} onChange={handleChange} />
-      <button onClick={handleSubmit}>Move</button>
+      <div className="row">
+        <input type="text" placeholder='Horse ID' name='horseId' value={form.horseId} onChange={handleChange} />
+        <input type="text" placeholder='New Stable ID' name='stableId' value={form.stableId} onChange={handleChange} />
+        <button onClick={handleSubmit}>Move</button>
+      </div>
+     
     </div>
   )
 }

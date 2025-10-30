@@ -34,13 +34,13 @@ button:hover{
     outline: none;
 }
 
-.guestHome h1 {
+.def_layout h1 {
   font-size: 50px;
   font-weight: 600;
   color: #F92672;
   margin: 0;
 }
-.guestHome h2 {
+.def_layout h2 {
   font-size: 25px;
   font-weight: 600;
   color: #F92672;
@@ -52,6 +52,7 @@ button:hover{
   flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   padding: 15px;
+  gap: 15px
 }
 
 .column > * {
@@ -85,6 +86,7 @@ button:hover{
   align-items: start;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   width: 100%;
+  gap: 15px
 }
 
 .row > * {
@@ -107,13 +109,34 @@ button:hover{
   justify-content: space-around;
 }
 
+.admin-layout-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-header {
+  height: 25vh;
+  min-height: 300px; /* fallback for small screens */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-content-scrollable {
+  flex: 1;
+  min-height: 0;  /* required for flex scroll */
+  overflow-y: auto;
+  max-height: 600px;
+  padding: 24px;
+}
 
 
 .styled-table {
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
-  border: 1px solid #A6E22E;
 }
 
 /* Styling for the header row */
@@ -122,11 +145,13 @@ button:hover{
   color: rgba(249, 38, 114, 1);
   text-align: center;
   font-weight: 600;
+ 
 }
 
 /* Styling for table cells (header and body) */
 .styled-table th, .styled-table td {
   padding: 1rem 1rem 1rem 1rem;
+  border-top: 1px solid #A6E22E;
   border-bottom: 1px solid #A6E22E; 
   border-right: 1px solid #A6E22E;
   border-left: 1px solid #A6E22E;

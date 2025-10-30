@@ -20,7 +20,6 @@ const Trainers = () => {
       }, [])
   return (
     <div>
-    <button onClick={() => navigate('/adminHome')}>Admin Home</button>
    <h1>Trainers</h1> 
    <table className='styled-table'>
     <thead>
