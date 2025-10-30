@@ -1,6 +1,3 @@
-# Navigate to project root
-cd C:\DataBaseProjectForHourseRacing
-
 # Install backend dependencies
 cd backend
 npm install
