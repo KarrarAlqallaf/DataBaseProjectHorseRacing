@@ -3,7 +3,7 @@ import mysql from "mysql2"
 import cors from "cors"
 
 const app = express()
-app.use(express.json());
+app.use(express.json())
 const db = mysql.createConnection({
     host: "localhost",
     user: "root", 
@@ -11,6 +11,10 @@ const db = mysql.createConnection({
     database: "hourse_racing"
 })
 app.use(cors())
+
+app.listen(8800, ()=>{
+  console.log("Connected to backend!")
+})
 
 
 
@@ -277,23 +281,19 @@ app.get("/guest/track-stats", (req, res) => {
   const q = `
     SELECT 
       tr.trackName,
+      tr.location,
+      tr.length,
       COUNT(DISTINCT r.raceId) AS raceCount,
       COUNT(rr.horseId) AS totalParticipants
     FROM Track tr
     LEFT JOIN Race r ON r.trackName = tr.trackName
     LEFT JOIN RaceResults rr ON rr.raceId = r.raceId
-    GROUP BY tr.trackName
+    GROUP BY tr.trackName, tr.location, tr.length
     ORDER BY tr.trackName
-  `
+  `;
   db.query(q, (err, rows) => {
     if (err) return res.status(500).json(err)
     res.json(rows)
   })
 })
 
-
-
-
-app.listen(8800, ()=>{
-    console.log("Connected to backend!")
-})
