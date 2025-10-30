@@ -20,7 +20,7 @@ function NewTrainer() {
     e.preventDefault()
     try {
       await axios.post('http://localhost:8800/trainer', trainer)
-      navigate('/trainers')
+      navigate('/adminHome')
     } catch (err) {
       console.log(err)
     }

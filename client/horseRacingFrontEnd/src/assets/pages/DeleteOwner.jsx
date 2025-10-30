@@ -12,7 +12,7 @@ function DeleteOwner() {
     if (!ownerId) return
     try {
       await axios.delete(`http://localhost:8800/owner/${ownerId}`)
-      navigate('/owners')
+      navigate('/adminHome')
     } catch (err) {
       console.log(err)
     }
