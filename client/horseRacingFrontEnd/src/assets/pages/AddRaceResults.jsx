@@ -19,7 +19,11 @@ function AddRaceResults() {
     const handleClick = async e => {
         e.preventDefault()
         try {
-            await axios.post("http://localhost:8800/raceresults", race)
+            const payload = {
+                ...race,
+                prize: race.prize === "" ? null : Number(parseFloat(race.prize).toFixed(2))
+            }
+            await axios.post("http://localhost:8800/raceresults", payload)
             navigate('/adminHome')
             console.log("race results has been added")
         } catch (err) {
@@ -31,12 +35,12 @@ function AddRaceResults() {
     return (
         
         <div className='form column'>
-            <h1>Add New Race</h1>
+            <h1>Add New Race Results</h1>
             <div className='row'>
             <input type="text" placeholder='Race ID' onChange={handleChange} name='raceId' />
             <input type="text" placeholder='Horse ID' onChange={handleChange} name='horseId' />
             <input type="text" placeholder='Results' onChange={handleChange} name='resutls' />
-            <input type="date" placeholder='Prize' onChange={handleChange} name='prize' />
+            <input type="number" step="0.01" placeholder='Prize' onChange={handleChange} name='prize' />
             <button onClick={handleClick}>Add Race Results</button>
             </div>
         </div>
