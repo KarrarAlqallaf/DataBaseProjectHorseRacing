@@ -39,7 +39,7 @@ function AddRaceResults() {
             <div className='row'>
             <input type="text" placeholder='Race ID' onChange={handleChange} name='raceId' />
             <input type="text" placeholder='Horse ID' onChange={handleChange} name='horseId' />
-            <input type="text" placeholder='Results' onChange={handleChange} name='resutls' />
+            <input type="text" placeholder='Results' onChange={handleChange} name='results' />
             <input type="number" step="0.01" placeholder='Prize' onChange={handleChange} name='prize' />
             <button onClick={handleClick}>Add Race Results</button>
             </div>

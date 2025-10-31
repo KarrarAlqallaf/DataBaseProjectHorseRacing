@@ -186,7 +186,7 @@ app.post("/stable", (req, res) => {
   
   // RaceResults
   app.post("/raceresults", (req, res) => {
-    const { raceId, horseId, results, prize } = req.body
+    const { raceId, horseId, results, prize } = req.body;
     const q = "INSERT INTO RaceResults (raceId, horseId, results, prize) VALUES (?, ?, ?, ?)"
     db.query(q, [raceId, horseId, results, prize], (err) => {
       if (err) return res.status(500).json(err)
@@ -229,8 +229,7 @@ app.get("/guest/horses-by-owner", (req, res) => {
 
 // 2) Trainers who have trained winners; include trainer, horse, race details
 app.get("/guest/winner-trainers", (req, res) => {
-  const q = `CALL GetTrainersWithWinners()
-  `
+  const q = `CALL GetTrainersWithWinners()`
   db.query(q, (err, rows) => {
     if (err) return res.status(500).json(err)
     res.json(rows[0])
