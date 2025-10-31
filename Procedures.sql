@@ -10,6 +10,27 @@ END$$
 
 DELIMITER ;
 
+
+DROP TRIGGER IF EXISTS save_info;
+CREATE TRIGGER save_info
+BEFORE DELETE ON Horse
+FOR EACH ROW
+    INSERT INTO old_info (
+        horseId, 
+        horseName, 
+        age, 
+        gender, 
+        registration, 
+        stableId
+    ) VALUES (
+        OLD.horseId,
+        OLD.horseName,
+        OLD.age,
+        OLD.gender,
+        OLD.registration,
+        OLD.stableId
+    );
+
 DROP PROCEDURE IF EXISTS GetHorsesByOwnerLastName;
 
 CREATE PROCEDURE GetHorsesByOwnerLastName(IN owner_lname VARCHAR(255))
