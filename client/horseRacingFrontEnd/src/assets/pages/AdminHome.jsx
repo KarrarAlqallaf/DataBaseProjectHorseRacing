@@ -8,6 +8,7 @@ import NewTrainer from './NewTrainer';
 import Owners from './Owners';
 import { Stables } from './Stables';
 import Trainers from './Trainers';
+import AddRaceResults from './AddRaceResults'; 
 
 const AdminHome = () => {
     const navigate = useNavigate();
@@ -17,6 +18,8 @@ const AdminHome = () => {
         switch (activeComponent) {
             case 'addRace':
                 return <AddRace />;
+            case 'addRaceResults':
+                return <AddRaceResults />
             case 'deleteOwner':
                 return <DeleteOwner />;
             case 'moveHorse':
@@ -45,6 +48,7 @@ const AdminHome = () => {
           <h1>Admin Home</h1>
           <div className='row'>
               <button onClick={() => setActiveComponent('addRace')}>Add Race</button>
+              <button onClick={() => setActiveComponent('addRaceResults')}>Add Race Results</button>
               <button onClick={() => setActiveComponent('deleteOwner')}>Delete Owner</button>
               <button onClick={() => setActiveComponent('moveHorse')}>Move Horse</button>
               <button onClick={() => setActiveComponent('newTrainer')}>New Trainer</button>
