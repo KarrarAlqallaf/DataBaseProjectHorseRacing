@@ -1,3 +1,4 @@
+DROP table IF EXISTS Stable;
 create table Stable (
   stableId varchar(15) not null,
   stableName varchar(30),
@@ -6,6 +7,7 @@ create table Stable (
   primary key (stableId)
 );
 
+DROP table IF EXISTS Horse;
 create table Horse (
   horseId varchar(15) not null,
   horseName varchar(15) not null,
@@ -17,6 +19,7 @@ create table Horse (
   primary key (horseId)
 );
 
+DROP table IF EXISTS Owner;
 create table Owner (
   ownerId varchar(15) not null,
   lname varchar(15),
@@ -24,6 +27,7 @@ create table Owner (
   primary key (ownerId)
 );
 
+DROP table IF EXISTS Owns;
 create table Owns (
   ownerId varchar(15) not null,
   horseId varchar(15) not null,
@@ -32,6 +36,7 @@ create table Owns (
   foreign key (horseId) references Horse (horseId)
 );
 
+DROP table IF EXISTS Trainer;
 create table Trainer (
   trainerId varchar(15) not null,
   lname varchar(30),
@@ -41,6 +46,7 @@ create table Trainer (
   foreign key (stableId) references Stable (stableId)
 );
 
+DROP table IF EXISTS Track;
 create table Track (
   trackName varchar(30) not null,
   location varchar(30),
@@ -48,6 +54,7 @@ create table Track (
   primary key (trackName)
 );
 
+DROP table IF EXISTS Race;
 create table Race (
   raceId varchar(15) not null,
   raceName varchar(30),
@@ -58,6 +65,7 @@ create table Race (
   foreign key (trackName) references Track (trackName)
 );
 
+DROP table IF EXISTS RaceResults;
 create table RaceResults (
   raceId varchar(15) not null,
   horseId varchar(15) not null,
@@ -66,4 +74,16 @@ create table RaceResults (
   primary key (raceId, horseId),
   foreign key (raceId) references Race (raceId),
   foreign key (horseId) references Horse (horseId)
+);
+
+DROP table IF EXISTS old_info;
+create table old_info (
+  horseId varchar(15) not null,
+  horseName varchar(15) not null,
+  age int,
+  gender char,
+  registration integer not null,
+  stableId varchar(30) not null,
+  foreign key (stableId) references Stable (stableId),
+  primary key (horseId)
 );
